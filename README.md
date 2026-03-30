@@ -1,3 +1,4 @@
+![image alt](https://github.com/nikhil-ai-insights/daily-hr-referral-cold-email-system-v1/blob/b337904216756b98692003912355460ad43b75f5/asset.png)
 # 📧 Daily HR Referral Cold Email System (n8n Workflow)
 
 ## 🚀 Overview
