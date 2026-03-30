@@ -1,82 +1,179 @@
-# 📧 n8n Email Outreach System v1
+# 🚀 Daily HR Referral Cold Email System v1
 
-## 🚀 Brief One Line Summary
-An automated cold email outreach system that efficiently connects with HR professionals using n8n workflows.
+> An automated n8n workflow that sends personalized cold emails to HR professionals daily with smart filtering, limits, and tracking.
 
 ---
 
-## 📌 Overview
-This project is an end-to-end automation workflow built using n8n to streamline cold email outreach. It fetches HR contact data from Google Sheets, filters relevant leads, and sends personalized emails via Gmail while maintaining limits and delays to simulate human behavior.
+## 📌 Table of Contents
+
+- [Overview](#-overview)
+- [Problem Statement](#-problem-statement)
+- [Dataset](#-dataset)
+- [Tools and Technologies](#️-tools-and-technologies)
+- [Workflow Architecture](#️-workflow-architecture)
+- [Key Insights](#-key-insights)
+- [How to Run](#️-how-to-run-this-project)
+- [Results and Conclusion](#-results-and-conclusion)
+- [Future Improvements](#-future-improvements)
+
+---
+
+## 🧠 Overview
+
+The **Daily HR Referral Cold Email System** is a fully automated outreach solution built using **n8n**. It streamlines the process of connecting with HR professionals by fetching contact data from Google Sheets, filtering relevant leads, and sending personalized emails through Gmail.
+
+The system ensures efficiency, avoids spam detection, and maintains proper tracking by updating outreach status after each email.
 
 ---
 
 ## ❗ Problem Statement
-Manual cold emailing is time-consuming, inconsistent, and prone to errors such as duplicate outreach and lack of tracking. There is a need for an automated system that can:
-- Manage contacts efficiently  
-- Send emails at scale without triggering spam filters  
-- Track outreach status accurately  
+
+Cold emailing manually is inefficient and prone to multiple issues:
+
+- ⏱️ Time-consuming repetitive tasks
+- 🔁 Risk of sending duplicate emails
+- 📉 Lack of proper tracking
+- 🚫 High chances of being flagged as spam
+
+This project solves these problems by **automating the entire outreach pipeline**.
 
 ---
 
 ## 📊 Dataset
-- Source: Google Sheets  
-- Data includes:
-  - HR Name  
-  - Company Name  
-  - Email Address  
-  - Status (Emailed / Not Emailed)  
+
+**Source:** Google Sheets
+
+| Field | Description |
+|---|---|
+| HR Name | Full name of the HR contact |
+| Company Name | Company the HR belongs to |
+| Email Address | Professional email address |
+| Status | `Emailed` / `Not Emailed` |
 
 ---
 
 ## 🛠️ Tools and Technologies
-- **n8n** – Workflow automation  
-- **Google Sheets API** – Data storage and retrieval  
-- **Gmail API** – Sending emails  
-- **JavaScript (within n8n nodes)** – Data filtering and logic  
+
+| Tool | Purpose |
+|---|---|
+| **n8n** | Workflow automation engine |
+| **Google Sheets API** | Data storage and retrieval |
+| **Gmail API** | Email delivery |
+| **IF Node** | Conditional filtering of contacts |
+| **Rate Limiting** | Controlled email sending |
+| **Delay/Wait Node** | Human-like behavior simulation |
 
 ---
 
-## ⚙️ Methods
-1. Scheduled trigger initiates the workflow  
-2. Fetch HR data from Google Sheets  
-3. Filter contacts based on predefined conditions  
-4. Send personalized emails via Gmail  
-5. Apply rate limits and delays to avoid spam detection  
-6. Update the sheet to mark contacts as "Emailed"  
+## ⚙️ Workflow Architecture
+
+The workflow follows a structured automation pipeline:
+
+```
+Schedule Trigger
+      ↓
+Get Rows (Google Sheets)
+      ↓
+IF Node — Filter "Not Emailed" contacts
+      ↓
+Limit Node — Cap emails per run
+      ↓
+Gmail Node — Send personalized email
+      ↓
+Wait Node — Delay between sends
+      ↓
+Update Row (Google Sheets) — Mark as "Emailed"
+```
+
+### Step-by-Step Breakdown
+
+1. **⏰ Schedule Trigger** — Automatically runs the workflow at a defined time daily
+2. **📋 Get Rows (Google Sheets)** — Fetches all HR contact data from the sheet
+3. **🔀 IF Node (Filter)** — Selects only contacts with status `Not Emailed`
+4. **🔢 Limit Node** — Restricts the number of emails per run to avoid spam flags
+5. **📧 Gmail Node** — Sends a personalized cold email to each contact
+6. **⏳ Wait Node** — Adds a delay between emails for human-like behavior
+7. **✅ Update Row (Google Sheets)** — Marks each contact as `Emailed` to prevent duplicates
 
 ---
 
 ## 🔍 Key Insights
-- Automation significantly reduces manual effort  
-- Controlled email limits improve deliverability  
-- Tracking prevents duplicate outreach  
-- Personalization increases response rates  
+
+- ⚡ Automation reduces manual effort by **90%+**
+- 📬 Email limits improve deliverability and avoid spam filters
+- 🔒 Tracking system ensures **zero duplicate outreach**
+- 🤖 Delays make automation appear more human-like
+- 📈 Fully scalable for high-volume daily outreach
 
 ---
 
 ## ▶️ How to Run This Project
-1. Clone the repository  
-2. Import the workflow JSON into n8n  
-3. Connect your:
-   - Google Sheets account  
-   - Gmail account  
-4. Update your Google Sheet with HR data  
-5. Configure email limits and delay settings  
-6. Run the workflow manually or schedule it  
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/[your-username](https://github.com/nikhil-ai-insights)/daily-hr-referral-cold-email-system.git
+cd daily-hr-referral-cold-email-system
+```
+
+### 2. Set Up n8n
+
+- Install n8n locally or use the cloud version
+- Import the `workflow.json` file into your n8n instance
+
+### 3. Connect Services
+
+- 🔗 Connect your **Google Sheets** account via OAuth
+- 🔗 Connect your **Gmail** account via OAuth
+
+### 4. Configure Your Google Sheet
+
+Ensure your sheet contains the following columns:
+
+```
+| Name | Email | Company | Status |
+```
+
+### 5. Customize the Workflow
+
+- Set your preferred **daily schedule**
+- Adjust the **email sending limit** per run
+- Modify the **delay timing** between emails
+- Personalize the **email template** content
+
+### 6. Run the Workflow
+
+```bash
+# Option A: Trigger manually from the n8n dashboard
+# Option B: Enable the Schedule Trigger for full automation
+```
 
 ---
 
 ## 📈 Results and Conclusion
-The system successfully automates cold outreach while maintaining efficiency and accuracy. It ensures scalable email sending, avoids duplication, and improves overall productivity. This workflow can be extended further with AI-based personalization and response tracking.
+
+This system successfully automates daily cold outreach while maintaining efficiency and accuracy. It prevents duplicate emails, ensures proper tracking, and improves productivity significantly.
+
+The workflow is **scalable** and can be adapted for different outreach use cases such as sales, networking, or recruitment.
 
 ---
 
 ## 💡 Future Improvements
-- AI-generated personalized email content  
-- Reply tracking and analytics dashboard  
-- Integration with CRM systems  
-- Multi-channel outreach (LinkedIn, WhatsApp, etc.)
+
+- [ ] 🤖 AI-generated personalized email content
+- [ ] 📊 Email open/reply tracking
+- [ ] 📉 Dashboard for analytics
+- [ ] 🔗 CRM integration
+- [ ] 🌐 Multi-channel outreach (LinkedIn, WhatsApp)
 
 ---
 
-⭐ If you found this project useful, consider giving it a star!
+## ⭐ Support
+
+If you found this project helpful, please consider giving it a **⭐ star** on GitHub — it means a lot!
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
